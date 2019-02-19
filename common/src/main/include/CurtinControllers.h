@@ -70,6 +70,7 @@ namespace curtinfrc {
     ControllerGroup& operator=(ControllerGroup&&) = default;
 
     int GetPort(int cont);
+    int GetRawPOVAngle(int cont);
 
     double GetRawAxis(int cont, int axis = 1);
     double GetAxis(tControllerAxis contAxis);

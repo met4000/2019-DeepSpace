@@ -9,6 +9,10 @@ int curtinfrc::ControllerGroup::GetPort(int cont) {
   return GetController(cont).GetPort();
 }
 
+int curtinfrc::ControllerGroup::GetRawPOVAngle(int cont) {
+  return GetController(cont).GetRawPOVAngle();
+}
+
 
 double curtinfrc::ControllerGroup::GetRawAxis(int cont, int axis) {
   return GetController(cont).GetRawAxis(axis);
