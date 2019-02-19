@@ -17,7 +17,8 @@ class ControlMap {
   // DRIVETRAIN JOYMAP
   static const curtinfrc::tControllerButtonMap reverseDrivetrain;   // Toggles the direction of the drivetrain
   static const curtinfrc::tControllerButtonMap holdMovement;        // Makes the robot 'line up' (0 magnitude but still rotating)
-  static const curtinfrc::tControllerButtonMap activateFOC;        // Toggles the drivetrain between Manual and FOC control
+  static const curtinfrc::tControllerButtonMap activateFOC;         // Toggles the drivetrain between Manual and FOC control
+  static const int contPOV;
 
 
   // BEELEVATOR JOYMAP
