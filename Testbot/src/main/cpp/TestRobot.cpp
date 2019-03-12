@@ -10,8 +10,6 @@ double lastTimestamp;
 void Robot::RobotInit() {
   lastTimestamp = frc::Timer::GetFPGATimestamp();
   
-  xbox = new curtinfrc::controllers::XboxController(0);
-  
   leftMotors[0] = new curtinfrc::Talon(1);
   leftMotors[0]->SetInverted(false);
   left = new curtinfrc::Gearbox{ new curtinfrc::actuators::MotorVoltageController(new frc::SpeedControllerGroup(*leftMotors[0])), nullptr};
@@ -35,11 +33,9 @@ void Robot::AutonomousPeriodic() {
   double dt = frc::Timer::GetFPGATimestamp() - lastTimestamp;
   lastTimestamp = frc::Timer::GetFPGATimestamp();
 
-  if (contGroup.GetButtonRise({ 0, 1 })) {
-    double offset = drivetrain->GetConfig().gyro->GetAngle();
-    offset += 0; // get angle from nt
-    Schedule(std::make_shared<DrivetrainAngleStrategy>(*drivetrain, curtinfrc::control::PIDGains("Drivetrain Align", 0.3, 0, 0.04), offset));
-  }
+  double offset = drivetrain->GetConfig().gyro->GetAngle();
+  offset += 0; // get angle from nt
+  Schedule(std::make_shared<DrivetrainAngleStrategy>(*drivetrain, curtinfrc::control::PIDGains("Drivetrain Align", 0.3, 0, 0.04), offset));
 
   Update(dt);
 }

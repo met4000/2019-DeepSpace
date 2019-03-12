@@ -11,7 +11,7 @@
 #include "Gearbox.h"
 #include "Drivetrain.h"
 
-#include "strategies/DriveStrategies.h"
+#include "DriveStrategies.h"
 
 
 class Robot : public frc::TimedRobot, protected curtinfrc::StrategyController {

@@ -1,34 +1,30 @@
-#include "strategies/DriveStrategies.h"
+#include "DriveStrategies.h"
 
 #include <cmath>
 
-// #include "ControlMap.h"
-
 using namespace curtinfrc;
+using namespace curtinfrc::controllers;
 
-BaseDrivetrainTeleopStrategy::BaseDrivetrainTeleopStrategy(std::string name, Drivetrain &drivetrain, ControllerGroup &contGroup)
+BaseDrivetrainTeleopStrategy::BaseDrivetrainTeleopStrategy(std::string name, Drivetrain &drivetrain, SmartControllerGroup &contGroup)
     : Strategy(name), _drivetrain(drivetrain), _contGroup(contGroup) {
   Requires(&drivetrain);
   SetCanBeInterrupted(true);
   SetCanBeReused(true);
 } 
 
-DrivetrainManualStrategy::DrivetrainManualStrategy(Drivetrain &drivetrain, ControllerGroup &contGroup) : BaseDrivetrainTeleopStrategy("Drivetrain Manual", drivetrain, contGroup) { }
+DrivetrainManualStrategy::DrivetrainManualStrategy(Drivetrain &drivetrain, SmartControllerGroup &contGroup) : BaseDrivetrainTeleopStrategy("Drivetrain Manual", drivetrain, contGroup) { }
 
 void DrivetrainManualStrategy::OnUpdate(double dt) {
   double joyForward = 0, joyTurn = 0;
   
-  joyForward = -_contGroup.GetCircularisedAxisAgainst({ 0, 1 }, { 0, 0 }) * 0.9;
+  joyForward = -_contGroup.Get(tAxis(0, 0)) * 0.9;
   joyForward *= std::abs(joyForward);
 
-  joyTurn = _contGroup.GetCircularisedAxisAgainst({ 0, 0 }, { 0, 1 }) * 0.7;
+  joyTurn = _contGroup.Get(tAxis(0, 1)) * 0.7;
   // joyTurn *= abs(joyTurn);
 
   double leftSpeed = joyForward + joyTurn;
   double rightSpeed = joyForward - joyTurn;
-
-  if (_invertedToggle.Update(_contGroup.GetButton({ 0, 2 })))
-    _drivetrain.SetInverted(!_drivetrain.GetInverted());
 
   _drivetrain.Set(leftSpeed, rightSpeed);
 }
