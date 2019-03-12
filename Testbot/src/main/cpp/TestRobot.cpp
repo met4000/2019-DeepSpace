@@ -10,6 +10,8 @@ double lastTimestamp;
 void Robot::RobotInit() {
   lastTimestamp = frc::Timer::GetFPGATimestamp();
   
+  xbox = new curtinfrc::controllers::XboxController(0);
+  
   leftMotors[0] = new curtinfrc::Talon(1);
   leftMotors[0]->SetInverted(false);
   left = new curtinfrc::Gearbox{ new curtinfrc::actuators::MotorVoltageController(new frc::SpeedControllerGroup(*leftMotors[0])), nullptr};

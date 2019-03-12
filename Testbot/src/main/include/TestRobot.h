@@ -5,7 +5,7 @@
 #include <frc/XboxController.h>
 #include <frc/SpeedControllerGroup.h>
 #include <frc/DoubleSolenoid.h>
-#include "CurtinControllers.h"
+#include "controllers/CurtinControllers.h"
 
 #include "CurtinCtre.h"
 #include "Gearbox.h"
@@ -27,8 +27,8 @@ class Robot : public frc::TimedRobot, protected curtinfrc::StrategyController {
   void TestInit() override;
   void TestPeriodic() override;
 
-  curtinfrc::XboxController xbox{0};
-  curtinfrc::ControllerGroup contGroup{xbox};
+  curtinfrc::controllers::XboxController xbox{0};
+  curtinfrc::controllers::SmartControllerGroup contGroup{xbox};
 
   curtinfrc::Talon *leftMotors[1], *rightMotors[1];
   curtinfrc::Gearbox *left, *right;
