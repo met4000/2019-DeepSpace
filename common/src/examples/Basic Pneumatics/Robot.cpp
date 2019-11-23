@@ -24,7 +24,7 @@ void Robot::RobotPeriodic() {
     solenoid.SetTarget(actuators::BinaryActuatorState::kForward);
   } else {
     // ... and to retract on 'odd' seconds...
-    solenoid.SetTarget(actuators::BinaryActuatorState::kForward);
+    solenoid.SetTarget(actuators::BinaryActuatorState::kReverse);
   }
 
   
